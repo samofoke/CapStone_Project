@@ -1,11 +1,15 @@
 import { Fragment } from "react";
 import { Outlet, Link } from "react-router-dom";
+import { ReactComponent as Shut } from "../../assets/Shutter.svg";
+import "../../components/styles-component/navigation/navigation.scss";
 
 const Navigation = () => {
   return (
     <Fragment>
       <div className="navigation">
-        <div>Logo</div>
+        <Link className="logo-container" to="/">
+          <Shut className="logo" />
+        </Link>
         <div className="page-links">
           <Link className="nav-link" to="/">
             Store
