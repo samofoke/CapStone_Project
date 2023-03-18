@@ -5,6 +5,12 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc
+} from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,7 +27,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 
-//This is class we access via google api
+//This is a function we need to access the google api for auth2.0
 const requestProvider = new GoogleAuthProvider();
 requestProvider.setCustomParameters({
   prompt: "select_account",
