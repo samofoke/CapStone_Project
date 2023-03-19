@@ -23,14 +23,17 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 
 //This is a function we need to access the google api for auth2.0
-const requestProvider = new GoogleAuthProvider();
-requestProvider.setCustomParameters({
+const googleProvider = new GoogleAuthProvider();
+
+googleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
 export const auth = getAuth();
 export const signInWithGooglePopup = () =>
-  signInWithPopup(auth, requestProvider);
+  signInWithPopup(auth, googleProvider);
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
 
