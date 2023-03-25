@@ -5,6 +5,7 @@ import ButtonComponent from "../button-component/button";
 import {
   signInWithGooglePopup,
   createDocumentFromAuth,
+  signInAuthEmailandPassword,
 } from "../../util/firebase/firebase.utils";
 
 const defaultFormFields = {
@@ -15,8 +16,6 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-
-  console.log(formFields);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -37,8 +36,21 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
+      const res = await signInAuthEmailandPassword(email, password);
+      console.log(res);
       resetFormFields();
-    } catch (error) {}
+    } catch (error) {
+      switch (error.code) {
+        case "auth/wrong-password":
+          alert("Incorrect password");
+          break;
+        case "auth/user-not-found":
+          alert("User email not found");
+          break;
+        default:
+          console.log(error);
+      }
+    }
   };
 
   return (
@@ -65,7 +77,11 @@ const SignInForm = () => {
         />
         <div className="buttons-container">
           <ButtonComponent type="submit">Sign In</ButtonComponent>
-          <ButtonComponent buttonType="google" onClick={signInWithGoogle}>
+          <ButtonComponent
+            type="button"
+            buttonType="google"
+            onClick={signInWithGoogle}
+          >
             Google sign in
           </ButtonComponent>
         </div>
