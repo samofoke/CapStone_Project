@@ -40,7 +40,6 @@ const SignUpFrom = () => {
       const { user } = await authEmailandPassword(email, password);
 
       await createDocumentFromAuth(user, { displayName });
-      console.log(user);
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
