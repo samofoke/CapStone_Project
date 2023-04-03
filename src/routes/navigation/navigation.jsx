@@ -16,7 +16,7 @@ const Navigation = () => {
           <Shut className="logo" />
         </Link>
         <div className="page-links">
-          <Link className="nav-link" to="/">
+          <Link className="nav-link" to="/shop">
             SHOP
           </Link>
           {currentUser ? (
