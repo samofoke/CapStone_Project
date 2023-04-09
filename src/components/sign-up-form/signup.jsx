@@ -1,7 +1,7 @@
 import { useState } from "react";
 import FormInput from "../form-input/form-component";
 import "../styles-component/sign-up-container/sign-up.scss";
-import ButtonComponent from "../button-component/button";
+import Button from "../button-component/button";
 import {
   authEmailandPassword,
   createDocumentFromAuth,
@@ -88,7 +88,7 @@ const SignUpFrom = () => {
           required
           onChange={handleChange}
         />
-        <ButtonComponent type="submit">Sign Up</ButtonComponent>
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import FormInput from "../form-input/form-component";
 import "../styles-component/sign-in-container/sign-in.scss";
-import ButtonComponent from "../button-component/button";
+import Button from "../button-component/button";
 import {
   signInWithGooglePopup,
   signInAuthEmailandPassword,
@@ -73,14 +73,10 @@ const SignInForm = () => {
           onChange={handleChange}
         />
         <div className="buttons-container">
-          <ButtonComponent type="submit">Sign In</ButtonComponent>
-          <ButtonComponent
-            type="button"
-            buttonType="google"
-            onClick={signInWithGoogle}
-          >
+          <Button type="submit">Sign In</Button>
+          <Button type="button" buttonType="google" onClick={signInWithGoogle}>
             Google sign in
-          </ButtonComponent>
+          </Button>
         </div>
       </form>
     </div>
