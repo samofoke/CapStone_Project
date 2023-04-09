@@ -4,6 +4,7 @@ import { ReactComponent as Shut } from "../../assets/Shutter.svg";
 import "../../components/styles-component/navigation/navigation.scss";
 import { UserContext } from "../../contexts/user-context.";
 import { signOutUser } from "../../util/firebase/firebase.utils";
+import CardIcon from "../../components/card-icon/card-icon";
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
@@ -28,6 +29,7 @@ const Navigation = () => {
               SIGN IN
             </Link>
           )}
+          <CardIcon />
         </div>
       </div>
       <Outlet />
