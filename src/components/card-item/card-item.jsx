@@ -1,13 +1,19 @@
 import "../styles-component/card-item/card-item.scss";
 
-const CardItem = ({ item }) => {
-  const { name, quant } = item;
+const CartItem = ({ item }) => {
+  const { name, imageUrl, price, quant } = item;
+
   return (
-    <div>
-      <h2>{name}</h2>
-      <span>{quant}</span>
+    <div className="cart-item-container">
+      <img src={imageUrl} alt={`${name}`} />
+      <div className="item-details">
+        <span className="name">{name}</span>
+        <span className="price">
+          {quant} x R{price}
+        </span>
+      </div>
     </div>
   );
 };
 
-export default CardItem;
+export default CartItem;
