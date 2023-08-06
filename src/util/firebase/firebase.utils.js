@@ -16,7 +16,8 @@ import {
   setDoc,
   collection,
   writeBatch,
-  CollectionReference,
+  query,
+  getDocs,
 } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -61,7 +62,22 @@ export const addCollectionAndDocuments = async (collectionKey, jSonObjects) => {
   });
 
   await batch.commit();
-  console.log("process ended......");
+  // console.log("process ended......");
+};
+
+export const getCollections = async () => {
+  const collectRefference = collection(db, "categories");
+  const getQuery = query(collectRefference);
+
+  const snapShotQuery = await getDocs(getQuery);
+
+  const collectionMap = snapShotQuery.docs.reduce((acc, docsnapShot) => {
+    const { title, items } = docsnapShot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+
+  return collectionMap;
 };
 
 export const createDocumentFromAuth = async (
