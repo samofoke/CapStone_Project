@@ -9,7 +9,15 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+  CollectionReference,
+} from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -40,6 +48,21 @@ export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
+
+//Uploading files to firebase
+
+export const addCollectionAndDocuments = async (collectionKey, jSonObjects) => {
+  const collectRefference = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  jSonObjects.forEach((object) => {
+    const documentRef = doc(collectRefference, object.title.toLowerCase());
+    batch.set(documentRef, object);
+  });
+
+  await batch.commit();
+  console.log("process ended......");
+};
 
 export const createDocumentFromAuth = async (
   userAuth,
