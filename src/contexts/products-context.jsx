@@ -2,11 +2,11 @@ import { createContext, useState, useEffect } from "react";
 import { getCollections } from "../util/firebase/firebase.utils";
 
 export const ProductContext = createContext({
-  products: {},
+  categoriesMap: {},
 });
 
 export const ProductProvider = ({ children }) => {
-  const [products, setProducts] = useState({});
+  const [categoriesMap, setProducts] = useState({});
 
   useEffect(() => {
     const getCollectionMap = async () => {
@@ -17,7 +17,7 @@ export const ProductProvider = ({ children }) => {
     getCollectionMap();
   }, []);
 
-  const value = { products };
+  const value = { categoriesMap };
 
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
