@@ -9,7 +9,16 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
+} from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -40,6 +49,36 @@ export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
+
+//Uploading files to firebase
+
+export const addCollectionAndDocuments = async (collectionKey, jSonObjects) => {
+  const collectRefference = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  jSonObjects.forEach((object) => {
+    const documentRef = doc(collectRefference, object.title.toLowerCase());
+    batch.set(documentRef, object);
+  });
+
+  await batch.commit();
+  // console.log("process ended......");
+};
+
+export const getCollections = async () => {
+  const collectRefference = collection(db, "categories");
+  const getQuery = query(collectRefference);
+
+  const snapShotQuery = await getDocs(getQuery);
+
+  const collectionMap = snapShotQuery.docs.reduce((acc, docsnapShot) => {
+    const { title, items } = docsnapShot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+
+  return collectionMap;
+};
 
 export const createDocumentFromAuth = async (
   userAuth,
