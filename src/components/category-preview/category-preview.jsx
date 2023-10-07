@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../styles-component/category-preview/category-preview.scss";
 
 const CategoryPriew = ({ title, products }) => {
-  console.log("get products: ", products);
+  // console.log("get products: ", products);
   return (
     <div className="category-preview">
       <h2>

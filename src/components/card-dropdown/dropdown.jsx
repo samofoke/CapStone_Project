@@ -1,5 +1,9 @@
 import { useContext } from "react";
-import "../styles-component/card-dropdown/card-dropdown.scss";
+import {
+  CartDropdownContainer,
+  EmptyMessage,
+  CartIterms,
+} from "../styles-component/card-dropdown/card-dropdown.jsx";
 import Button from "../button-component/button";
 import CardItem from "../card-item/card-item";
 import { CartContext } from "../../contexts/cart/cart";
@@ -14,14 +18,16 @@ const CardDropdown = () => {
   };
 
   return (
-    <div className="dropdown-container">
-      <div className="cart-items">
-        {cartItems.map((e) => (
-          <CardItem key={e.id} item={e} />
-        ))}
+    <CartDropdownContainer>
+      <CartIterms>
+        {cartItems.length ? (
+          cartItems.map((e) => <CardItem key={e.id} item={e} />)
+        ) : (
+          <EmptyMessage>Your card is empty.</EmptyMessage>
+        )}
         <Button onClick={checkoutHandler}>Go TO CHECKOUT</Button>
-      </div>
-    </div>
+      </CartIterms>
+    </CartDropdownContainer>
   );
 };
 
