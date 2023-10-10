@@ -35,7 +35,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 
-const DEBUG = true; // Set to false in production
+const DEBUG = false; // Set to false in production
 
 function customLogger(message, data) {
   if (DEBUG) {
