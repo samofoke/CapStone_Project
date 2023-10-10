@@ -35,7 +35,15 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 
-console.log("initialize: ", firebaseApp);
+const DEBUG = true; // Set to false in production
+
+function customLogger(message, data) {
+  if (DEBUG) {
+    console.log(message, data);
+  }
+}
+
+customLogger("initialize: ", firebaseApp);
 
 //This is a function we need to access the google api for auth2.0
 const googleProvider = new GoogleAuthProvider();
