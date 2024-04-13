@@ -1,5 +1,6 @@
 import { Fragment, useContext } from "react";
 import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { ReactComponent as Shut } from "../../assets/Shutter.svg";
 import {
   NavigationContainer,
@@ -7,14 +8,14 @@ import {
   NavLinks,
   NavLink,
 } from "../../components/styles-component/navigation/navigation.jsx";
-import { UserContext } from "../../contexts/user-context.";
 import { signOutUser } from "../../util/firebase/firebase.utils";
 import { CartContext } from "../../contexts/cart/cart";
 import CardIcon from "../../components/card-icon/card-icon";
 import CardDropdown from "../../components/card-dropdown/dropdown";
 
 const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
+  // const { currentUser } = useContext(UserContext);
+  const currentUser = useSelector((state) => state.user.currentUser);
   const { isCartOpen } = useContext(CartContext);
   // console.log("getting the current User: ", currentUser);
 
